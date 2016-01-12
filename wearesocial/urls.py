@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from accounts.views import *
+from threads.views import *
 from paypal.standard.ipn import urls as paypal_urls
 from django.conf.urls.static import static
 from django.conf import settings
@@ -35,7 +36,14 @@ urlpatterns = [
                   url(r'^paypal-return/$', paypal_return),
                   url(r'^paypal-cancel/$', paypal_cancel),
                   url(r'^products/$', all_products, name="all_products"),
+                  url(r'^forum/$', forum, name="forum"),
                   url(r'^magazines/$', all_magazines, name="all_magazines"),
+                  url(r'^threads/(?P<subject_id>\d+)/$', threads, name='threads'),
+                  url(r'^new_thread/(?P<subject_id>\d+)/$', new_thread, name='new_thread'),
+                  url(r'^thread/(?P<thread_id>\d+)/$', thread, name='thread'),
+                  url(r'^post/new/(?P<thread_id>\d+)/$', new_post, name='new_post'),
+                  url(r'^post/edit/(?P<thread_id>\d+)/(?P<post_id>\d+)/$', edit_post, name='edit_post'),
+                  url(r'^post/delete/(?P<post_id>\d+)/$', delete_post, name='delete_post'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL,
                                                                                          document_root=settings.STATIC_ROOT)
