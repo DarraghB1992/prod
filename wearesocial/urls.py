@@ -19,7 +19,7 @@ from accounts.views import *
 from threads.views import *
 from paypal.standard.ipn import urls as paypal_urls
 from django.conf.urls.static import static
-from django.conf import settings
+import settings
 
 urlpatterns = [
                   url(r'^admin/', include(admin.site.urls)),
